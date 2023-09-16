@@ -3,12 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
 	"log"
 	"net/http"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 type Mark struct {
@@ -72,13 +73,6 @@ func GetMarks(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		query := r.URL.Query()
 		availability := query.Get("availability")
-		//var availabilityBool bool
-		//
-		//if availability == "true" {
-		//	availabilityBool = true
-		//} else if availability == "false" {
-		//	availabilityBool = false
-		//}
 
 		collection, err := ScrapeMyCollection(availability)
 		if err != nil {
@@ -132,11 +126,4 @@ func main() {
 
 		time.Sleep(30 * time.Second)
 	}
-	//http.HandleFunc("/", GetMarks)
-	//http.ListenAndServe(":8080", nil)
-
-	//for _, mark := range collection {
-	//	//fmt.Printf("", mark.Title)
-	//	//fmt.Printf("%v %s, стоимость: %s\n", mark.Availability, mark.Title, mark.Cost)
-	//}
 }
